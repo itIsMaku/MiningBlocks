@@ -1,0 +1,5 @@
+name: BM-MiningBlocks
+version: '${version}'
+main: cz.maku.buildmaniaminingblocks.App
+api-version: 1.17
+authors: [ itIsMaku ]
