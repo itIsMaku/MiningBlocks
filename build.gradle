@@ -21,6 +21,9 @@ repositories {
         name = 'codemc-repo'
         url = 'https://repo.codemc.io/repository/maven-public/'
     }
+    flatDir {
+        dir('libs')
+    }
 }
 
 dependencies {
@@ -30,6 +33,7 @@ dependencies {
     annotationProcessor 'org.jetbrains:annotations:20.1.0'
     compileOnly 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
     compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.0'
+    implementation name: 'IridiumColorAPI'
 }
 
 def targetJavaVersion = 8
