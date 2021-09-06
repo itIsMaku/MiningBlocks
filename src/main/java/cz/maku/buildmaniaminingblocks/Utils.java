@@ -1,16 +1,13 @@
 package cz.maku.buildmaniaminingblocks;
 
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
-import org.bukkit.inventory.meta.FireworkMeta;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.bukkit.ChatColor.COLOR_CHAR;
 
 public final class Utils {
 
@@ -24,15 +21,18 @@ public final class Utils {
         return result;
     }
 
-    private void spawnFirework(Location location){
-        Firework fw = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
-        FireworkMeta fwm = fw.getFireworkMeta();
-
-        fwm.setPower(1);
-        fwm.addEffect(FireworkEffect.builder().withColor(Color.YELLOW).flicker(true).build());
-        fw.setFireworkMeta(fwm);
-        fw.detonate();
-        Firework fw2 = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
-        fw2.setFireworkMeta(fwm);
+    public static String translateHexColorCodes(String startTag, String endTag, String message) {
+        Pattern hexPattern = Pattern.compile(startTag + "([A-Fa-f0-9]{6})" + endTag);
+        Matcher matcher = hexPattern.matcher(message);
+        StringBuffer buffer = new StringBuffer(message.length() + 4 * 8);
+        while (matcher.find()) {
+            String group = matcher.group(1);
+            matcher.appendReplacement(buffer, COLOR_CHAR + "x"
+                    + COLOR_CHAR + group.charAt(0) + COLOR_CHAR + group.charAt(1)
+                    + COLOR_CHAR + group.charAt(2) + COLOR_CHAR + group.charAt(3)
+                    + COLOR_CHAR + group.charAt(4) + COLOR_CHAR + group.charAt(5)
+            );
+        }
+        return matcher.appendTail(buffer).toString();
     }
 }

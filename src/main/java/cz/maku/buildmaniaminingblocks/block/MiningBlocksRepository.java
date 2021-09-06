@@ -3,6 +3,7 @@ package cz.maku.buildmaniaminingblocks.block;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import cz.maku.buildmaniaminingblocks.App;
+import cz.maku.buildmaniaminingblocks.Utils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
@@ -40,17 +41,19 @@ public class MiningBlocksRepository extends ArrayList<MiningBlock> {
             Hologram hologram = HologramsAPI.createHologram(app, new Location(hologramWorld, hologramX, hologramY, hologramZ));
             List<String> lines = new ArrayList<>();
             for (String configLine : blockSection.getStringList("hologram")) {
-                String line = ChatColor.translateAlternateColorCodes('&', configLine
+                String line = ChatColor.translateAlternateColorCodes('&',
+                        Utils.translateHexColorCodes("#", "",
+                        configLine
                         .replace("{mined}", String.valueOf(storage))
                         .replace("{max}", String.valueOf(blockSection.getInt("needed")))
                         .replace("{last_winner}", blockSection.getString("last-winner"))
-                        .replace("{state}", app.getConfig().getConfigurationSection("state").getString("can"))
+                        .replace("{state}", app.getConfig().getConfigurationSection("state").getString("can")))
                 );
                 hologram.appendTextLine(line);
                 lines.add(line);
             }
             MiningBlock miningBlock = new MiningBlock(
-                    block, Material.getMaterial(blockSection.getString("material")), ChatColor.translateAlternateColorCodes('&', blockSection.getString("name")),
+                    block, Material.getMaterial(blockSection.getString("material")), ChatColor.translateAlternateColorCodes('&', Utils.translateHexColorCodes("#", "", blockSection.getString("name"))),
                     hologram,
                     bukkitBlock,
                     blockSection.getInt("needed"),

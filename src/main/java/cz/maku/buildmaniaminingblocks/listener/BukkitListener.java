@@ -43,10 +43,12 @@ public class BukkitListener implements Listener {
                 .getConfigurationSection(miningBlock.getKey())
                 .getStringList("hologram");
         if (miningBlock.getMined() >= miningBlock.getNeeded() -1) {
-            String line = ChatColor.translateAlternateColorCodes('&', hologramLines
+            String line = ChatColor.translateAlternateColorCodes('&',
+                    Utils.translateHexColorCodes("#", "",
+                    hologramLines
                     .get(miningBlock.getProgressLine())
                     .replace("{mined}", String.valueOf(miningBlock.getNeeded()))
-                    .replace("{max}", String.valueOf(miningBlock.getNeeded()))
+                    .replace("{max}", String.valueOf(miningBlock.getNeeded())))
             );
             miningBlock.getHologram().insertTextLine(miningBlock.getProgressLine(), line);
             miningBlock.getHologram().removeLine(miningBlock.getProgressLine() + 1);
@@ -60,9 +62,11 @@ public class BukkitListener implements Listener {
             Map<MiningPlayer, Integer> sortedByBlocks = Utils.sortByValue(minedBlocks);
             for (Map.Entry<MiningPlayer, Integer> entry : sortedByBlocks.entrySet()) {
                 String winner = entry.getKey().getBukkit().getName();
-                String hologramLine = ChatColor.translateAlternateColorCodes('&', hologramLines
+                String hologramLine = ChatColor.translateAlternateColorCodes('&',
+                        Utils.translateHexColorCodes("#", "",
+                        hologramLines
                         .get(miningBlock.getWinnerLine())
-                        .replace("{last_winner}", winner)
+                        .replace("{last_winner}", winner))
                 );
                 miningBlock.getHologram().insertTextLine(miningBlock.getWinnerLine(), hologramLine);
                 miningBlock.getHologram().removeLine(miningBlock.getWinnerLine() + 1);
@@ -89,7 +93,7 @@ public class BukkitListener implements Listener {
                         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("{player}", miningPlayer.getBukkit().getName()));
                     }
                     for (String message : finalRewardSection.getStringList("messages")) {
-                        miningPlayer.getBukkit().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+                        miningPlayer.getBukkit().sendMessage(ChatColor.translateAlternateColorCodes('&', Utils.translateHexColorCodes("#", "", message)));
                     }
                 }
             }
@@ -113,18 +117,21 @@ public class BukkitListener implements Listener {
                     miningBlock.setActivated(true);
                     miningBlock.getBlock().setType(miningBlock.getMaterial());
 
-                    String stateHologramLine = ChatColor.translateAlternateColorCodes('&', hologramLines
+                    String stateHologramLine = ChatColor.translateAlternateColorCodes('&',
+                            Utils.translateHexColorCodes("#", "",
+                            hologramLines
                             .get(miningBlock.getStateLine())
                             .replace("{state}", App.getInstance().getConfig().getConfigurationSection("state").getString("can"))
-                    );
+                            ));
                     miningBlock.getHologram().insertTextLine(miningBlock.getStateLine(), stateHologramLine);
                     miningBlock.getHologram().removeLine(miningBlock.getStateLine() + 1);
 
-                    String hologramLine = ChatColor.translateAlternateColorCodes('&', hologramLines
+                    String hologramLine = ChatColor.translateAlternateColorCodes('&', Utils.translateHexColorCodes("#", "",
+                            hologramLines
                             .get(miningBlock.getProgressLine())
                             .replace("{mined}", String.valueOf(miningBlock.getMined()))
                             .replace("{max}", String.valueOf(miningBlock.getNeeded()))
-                    );
+                    ));
                     miningBlock.getHologram().insertTextLine(miningBlock.getProgressLine(), hologramLine);
                     miningBlock.getHologram().removeLine(miningBlock.getProgressLine() + 1);
                 }
@@ -144,9 +151,12 @@ public class BukkitListener implements Listener {
                         default:
                             seconds = " vteřin";
                     }
-                    String stateHologramLine = ChatColor.translateAlternateColorCodes('&', hologramLines
+                    String stateHologramLine = ChatColor.translateAlternateColorCodes('&',
+                            Utils.translateHexColorCodes("#", "",
+                            hologramLines
                             .get(miningBlock.getStateLine())
-                            .replace("{state}", App.getInstance().getConfig().getConfigurationSection("state").getString("cannot").replace("{cas}", String.valueOf(countdown.getTime()) + seconds))
+                            .replace("{state}", App.getInstance().getConfig().getConfigurationSection("state").getString("cannot").replace("{cas}", countdown.getTime() + seconds))
+                    )
                     );
                     miningBlock.getHologram().insertTextLine(miningBlock.getStateLine(), stateHologramLine);
                     miningBlock.getHologram().removeLine(miningBlock.getStateLine() + 1);
@@ -162,11 +172,13 @@ public class BukkitListener implements Listener {
         if (!miningBlock.getContributors().contains(miningPlayer)) {
             miningBlock.getContributors().add(miningPlayer);
         }
-        String hologramLine = ChatColor.translateAlternateColorCodes('&', hologramLines
+        String hologramLine = ChatColor.translateAlternateColorCodes('&',
+                Utils.translateHexColorCodes("#", "",
+                hologramLines
                 .get(miningBlock.getProgressLine())
                 .replace("{mined}", String.valueOf(miningBlock.getMined()))
                 .replace("{max}", String.valueOf(miningBlock.getNeeded()))
-        );
+        ));
         miningBlock.getHologram().insertTextLine(miningBlock.getProgressLine(), hologramLine);
         miningBlock.getHologram().removeLine(miningBlock.getProgressLine() + 1);
     }
