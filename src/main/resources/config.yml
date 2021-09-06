@@ -1,0 +1,105 @@
+blocks:
+  easy:
+    name: "&a&lEASY"
+    needed: 30
+    material: IRON_BLOCK
+    hologram:
+      - "&2&lTěžící blok &8- &a&lEASY"
+      - "&7Vytěž tento blok a získej odměnu."
+      - ""
+      - "&2&l* &aPostup: &f{mined}/{max}"
+      - "&2&l* &aPoslední výherce: &f{last_winner}"
+      - ""
+      - "{state}"
+    progress-line: 3
+    winner-line: 4
+    state-line: 6
+    location:
+      world: "Spawn"
+      x: 10
+      y: 20
+      z: 30
+    hologram-location:
+      world: "Spawn"
+      x: 10.5
+      y: 2
+      z: 30.5
+    storage: 0 # Do not edit
+    last-winner: "Nikdo"
+    rewards:
+      first:
+        required: 10
+        commands:
+          - 'give {player} gold_ingot 10'
+        messages:
+          - "Vyhral jsi blabla"
+          - "&cHodne greatuluju"
+      second:
+        required: 20
+        commands:
+          - 'give {player} gold_ingot 20'
+        messages:
+          - "Vyhral jsi blabla"
+          - "&cHodne greatuluju"
+      third:
+        required: 30
+        commands:
+          - 'give {player} gold_ingot 30'
+        messages:
+          - "Vyhral jsi blabla"
+          - "&cHodne greatuluju"
+  medium:
+    name: "&6&lMEDIUM"
+    needed: 30
+    material: GOLD_BLOCK
+    hologram:
+      - "&6&lTěžící blok &8- &e&lMEDIUM"
+      - "&7Vytěž tento blok a získej odměnu."
+      - ""
+      - "&6&l* &ePostup: &f{mined}/{max}"
+      - "&6&l* &ePoslední výherce: &f{last_winner}"
+      - ""
+      - "{state}"
+    progress-line: 3
+    winner-line: 4
+    state-line: 6
+    location:
+      world: "Spawn"
+      x: 15
+      y: 20
+      z: 30
+    hologram-location:
+      world: "Spawn"
+      x: 15.5
+      y: 2
+      z: 30.5
+    storage: 0 # Do not edit
+    last-winner: "Nikdo"
+    rewards:
+      first:
+        required: 10
+        commands:
+          - 'give {player} diamond 10'
+        messages:
+          - "Vyhral jsi blabla"
+          - "&cHodne greatuluju"
+      second:
+        required: 20
+        commands:
+          - 'give {player} diamond 20'
+        messages:
+          - "Vyhral jsi blabla"
+          - "&cHodne greatuluju"
+      third:
+        required: 30
+        commands:
+          - 'give {player} diamond 30'
+        messages:
+          - "Vyhral jsi blabla"
+          - "&cHodne greatuluju"
+
+reset-after: 10
+
+state:
+  can: "&aZnič blok."
+  cannot: "&cZnovu dostupné za &f{cas}&c."

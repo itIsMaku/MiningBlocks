@@ -1,5 +1,18 @@
 name: BM-MiningBlocks
 version: '${version}'
 main: cz.maku.buildmaniaminingblocks.App
-api-version: 1.17
+api-version: 1.16
 authors: [ itIsMaku ]
+depend:
+  - HolographicDisplays
+load: POSTWORLD
+commands:
+  setup:
+    description: Setup permission
+  reload:
+    description: Reload command
+
+permissions:
+  buildmania.miningblock.admin:
+    description: Permission for setup command
+    default: op
